@@ -28,13 +28,13 @@ class PrestationRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * Used in EmployerController(showPrestations)
+     * Used in EmployerController(showPrestations), EarningController(perEmployer)
      *
      * @param Employer $employer
      * @param User $user
      * @return array
      */
-    public function findAllPerEmployer(Employer $employer,User $user)
+    public function findAllByEmployer(Employer $employer,User $user)
     {
         return $this->getEntityManager()
             ->createQuery("SELECT p FROM AppBundle:Prestation p WHERE p.employer = :employer AND p.user = :user ORDER BY p.prestationDate")
@@ -51,7 +51,7 @@ class PrestationRepository extends \Doctrine\ORM\EntityRepository
      * @param User $user
      * @return array
      */
-    public function findAllPerMonth($start, $end, User $user)
+    public function findAllByMonth($start, $end, User $user)
     {
         return $this->getEntityManager()
             ->createQuery("SELECT p FROM AppBundle:Prestation p WHERE p.prestationDate >= :startDate AND p.prestationDate <= :endDate AND p.user = :user ORDER BY p.prestationDate")

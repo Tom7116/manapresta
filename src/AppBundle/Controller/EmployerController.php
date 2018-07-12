@@ -131,7 +131,7 @@ class EmployerController extends Controller
      */
     public function showPrestations(Employer $employer)
     {
-        $prestations = $this->getDoctrine()->getManager()->getRepository(Prestation::class)->findAllPerEmployer($employer, $this->getUser());
+        $prestations = $this->getDoctrine()->getManager()->getRepository(Prestation::class)->findAllByEmployer($employer, $this->getUser());
 
         if (!$prestations) {
             $this->addFlash('info', 'Vous n\'avez pas encore enregistré de prestations pour cet employeur.');
