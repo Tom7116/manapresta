@@ -26,17 +26,17 @@ PRESTATION :
 5) TODO : Form New (input datetime, mois à mettre en français);
 6) TODO : Form New (champs years, $years = [] + 'data' => new DateTime('Y-m-d'));
 7) Validation coter serveur dans le buildform;
-8) TODO : Classer les prestas par date;
+8) Classer les prestas par date;
 
 REVENUS :
--> 1) TODO : Par mois, tous les mois, accordéon (impossible de dérouler 2 mois en même temps)(cb d'heures travaillées, cb en revnues);
+>1) DONE : Par mois, tous les mois, accordéon (impossible de dérouler 2 mois en même temps)(cb d'heures travaillées, cb en revnues);
 2) TODO : Par employeur, tous les employeurs, accordéon (impossible de dérouler 2 employeurs en même temps)(cb d'heures travaillées, cb en revnues);
-3) TODO : Par mois + employeur, ALL;
-4) TODO : Classer les prestas par date;
+3) TODO : Par mois + employeuchoiceTypeFieldr, ALL;
+4) Classer les prestas par date;
 
 OPTIMISATION :
 1) ~TODO : Flash Message pour : ajout, suppression, modification de employeurs ET prestations;
 2) ~TODO : Flash Message : MEP de Toaster;
-3) TODO : Pas de camelCase dans les noms des champs en BDD;
+3) Pas de camelCase dans les noms des champs en BDD;
 4) TODO : __toString a éviter, choiceTypeField dans les form;
-5) TODO : Have a look to {% include my_twig_file %};
+5) Have a look to {% include my_twig_file %};

@@ -78,7 +78,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="date")
+     * @ORM\Column(name="created_at", type="date")
      */
     private $createdAt;
 

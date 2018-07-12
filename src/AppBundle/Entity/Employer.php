@@ -44,7 +44,7 @@ class Employer
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="date")
+     * @ORM\Column(name="created_at", type="date")
      */
     private $createdAt;
 
@@ -163,6 +163,24 @@ class Employer
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrestations()
+    {
+        return $this->prestations;
+    }
+
+    /**
+     * @param string $prestations
+     * @return Employer
+     */
+    public function setPrestations($prestations)
+    {
+        $this->prestations = $prestations;
+        return $this;
     }
 }
 

@@ -26,20 +26,18 @@ class EarningController extends Controller
     /**
      * @Route("/month", name="earning_per_month")
      * @Method("GET")
-     * @throws \Exception
      */
     public function perMonth()
     {
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $currentYear = date('Y');
 
         for ($i=1; $i<13; $i++) {
             if ($i<10) {
-                $monthlyPrestas[] = $em->getRepository(Prestation::class)->findAllPerMonth("$currentYear-0$i-01", "$currentYear-0$i-31", $user);
+                $monthlyPrestas[] = $em->getRepository(Prestation::class)->findAllPerMonth("$currentYear-0$i-01", "$currentYear-0$i-31", $this->getUser());
             } else {
-                $monthlyPrestas[] = $em->getRepository(Prestation::class)->findAllPerMonth("$currentYear-$i-01", "$currentYear-$i-31", $user);
+                $monthlyPrestas[] = $em->getRepository(Prestation::class)->findAllPerMonth("$currentYear-$i-01", "$currentYear-$i-31", $this->getUser());
             }
 
         }

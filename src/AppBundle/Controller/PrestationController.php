@@ -25,9 +25,7 @@ class PrestationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $prestations = $em->getRepository('AppBundle:Prestation')->findBy([
-            'user' => $this->getUser(),
-        ]);
+        $prestations = $em->getRepository('AppBundle:Prestation')->findAllOrderByDate($this->getUser());
 
         return $this->render('prestation/index.html.twig', array(
             'prestations' => $prestations,

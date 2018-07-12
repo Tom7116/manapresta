@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Employer;
+use AppBundle\Entity\User;
+
 /**
  * PrestationRepository
  *
@@ -10,12 +13,48 @@ namespace AppBundle\Repository;
  */
 class PrestationRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAllPerMonth($start, $end, $user)
+    /**
+     * Used in PrestationController(index)
+     *
+     * @param User $user
+     * @return array
+     */
+    public function findAllOrderByDate(User $user)
     {
         return $this->getEntityManager()
-            ->createQuery(
-                "SELECT p FROM AppBundle:Prestation p WHERE p.prestationDate >= :startDate AND p.prestationDate <= :endDate AND p.user = :user"
-            )
+            ->createQuery("SELECT p FROM AppBundle:Prestation p WHERE p.user = :user ORDER BY p.prestationDate")
+            ->setParameter(':user', $user)
+            ->getResult();
+    }
+
+    /**
+     * Used in EmployerController(showPrestations)
+     *
+     * @param Employer $employer
+     * @param User $user
+     * @return array
+     */
+    public function findAllPerEmployer(Employer $employer,User $user)
+    {
+        return $this->getEntityManager()
+            ->createQuery("SELECT p FROM AppBundle:Prestation p WHERE p.employer = :employer AND p.user = :user ORDER BY p.prestationDate")
+            ->setParameter(':employer', $employer)
+            ->setParameter(':user', $user)
+            ->getResult();
+    }
+
+    /**
+     * Used in EarningController(perMonth)
+     *
+     * @param $start
+     * @param $end
+     * @param User $user
+     * @return array
+     */
+    public function findAllPerMonth($start, $end, User $user)
+    {
+        return $this->getEntityManager()
+            ->createQuery("SELECT p FROM AppBundle:Prestation p WHERE p.prestationDate >= :startDate AND p.prestationDate <= :endDate AND p.user = :user ORDER BY p.prestationDate")
             ->setParameter(':startDate', $start)
             ->setParameter(':endDate', $end)
             ->setParameter(':user', $user)

@@ -16,7 +16,7 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function index(Request $request, AuthenticationUtils $authenticationUtils)
+    public function index(AuthenticationUtils $authenticationUtils)
     {
         if (!$this->getUser()) {
             $error = $authenticationUtils->getLastAuthenticationError();

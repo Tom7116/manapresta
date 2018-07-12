@@ -31,7 +31,7 @@ class Prestation
     /**
      * @var string
      *
-     * @ORM\Column(name="prestationDate", type="date")
+     * @ORM\Column(name="prestation_date", type="date")
      */
     private $prestationDate;
 
@@ -39,7 +39,7 @@ class Prestation
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", inversedBy="prestations")
-     * @ORM\JoinColumn(name="prestation_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="employer_id", referencedColumnName="id")
      */
     private $employer;
 
@@ -53,35 +53,35 @@ class Prestation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startTime", type="datetime")
+     * @ORM\Column(name="start_time", type="datetime")
      */
     private $startTime;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endTime", type="datetime")
+     * @ORM\Column(name="end_time", type="datetime")
      */
     private $endTime;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="hoursWorked", type="string")
+     * @ORM\Column(name="hours_worked", type="string")
      */
     private $hoursWorked;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="minutesWorked", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="minutes_worked", type="decimal", precision=10, scale=2)
      */
     private $minutesWorked;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="grossHonorary", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="gross_honorary", type="decimal", precision=10, scale=2, nullable=true)
      * @Assert\Range(min=0, max=100, minMessage="Cette valeur ne peut être en dessous de 0.")
      */
     private $grossHonorary;
@@ -89,7 +89,7 @@ class Prestation
     /**
      * @var string
      *
-     * @ORM\Column(name="netHonorary", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="net_honorary", type="decimal", precision=10, scale=2, nullable=true)
      * @Assert\Range(min=0, max=100, minMessage="Cette valeur ne peut être en dessous de 0.")
      */
     private $netHonorary;
@@ -97,28 +97,28 @@ class Prestation
     /**
      * @var string
      *
-     * @ORM\Column(name="grossGains", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="gross_gains", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $grossGains;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="grossToNet", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="gross_to_net", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $grossToNet;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="netGains", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="net_gains", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $netGains;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="totalNetGains", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="total_net_gains", type="decimal", precision=10, scale=2)
      */
     private $totalNetGains;
 

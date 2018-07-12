@@ -24,13 +24,13 @@
                         <ul class="navbar-nav m-auto">
                             {% if app.user %}
                                 <li class="nav-item">
-                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/employer}' ? 'active' }}" href="{{ path('employer_index') }}">Mes Employeurs</a></h5>
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/employer}' ? 'activeLink' }}" href="{{ path('employer_index') }}">Mes Employeurs</a></h5>
                                 </li>
                                 <li class="nav-item">
-                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/prestation}' ? 'active' }}" href="{{ path('prestation_index') }}">Mes Prestations</a></h5>
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/prestation}' ? 'activeLink' }}" href="{{ path('prestation_index') }}">Mes Prestations</a></h5>
                                 </li>
                                 <li class="nav-item">
-                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/earning}' ? 'active' }}" href="{{ path('earning_per_month') }}">Mes Revenus</a></h5>
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/earning}' ? 'activeLink' }}" href="{{ path('earning_per_month') }}">Mes Revenus</a></h5>
                                 </li>
                             {% else %}
                                 <li class="nav-item">

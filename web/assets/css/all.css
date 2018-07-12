@@ -44,7 +44,7 @@ h1:hover {
     color: rgb(0,175,33);
 }
 
-.active {
+.activeLink {
     color: black;
     text-shadow: darkred 1px 1px 1px;
 }
@@ -52,4 +52,8 @@ h1:hover {
 .monthButtons {
     width: 500px;
     height: 50px;
+}
+
+.bgTr {
+    background-color: rgba(200,150,0,0.3) !important;
 }
