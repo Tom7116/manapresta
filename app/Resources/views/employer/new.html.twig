@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="col-md-6 offset-md-3 card pb-3">
+
+            <h2 class="text-center mb-4">Ajout d'un employeur</h2>
+
+            {{ form_start(form) }}
+
+                <p>{{ form_widget(form.name, {'attr': {'placeholder': 'Nom de l\'employeur'}}) }}</p>
+                <p>{{ form_errors(form.name) }}</p>
+                <p>{{ form_widget(form.address, {'attr': {'placeholder': 'Adresse de l\'employeur'}}) }}</p>
+                <p>{{ form_errors(form.address) }}</p>
+
+                <div class="d-flex justify-content-around mt-3">
+                    <a href="{{ path('employer_index') }}" class="btn btn-outline-dark darkRedColor">Retour</a>
+                    <div class="text-right"><button class="btn btn-outline-dark darkRedColor" type="submit">Ajouter</button></div>
+                </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

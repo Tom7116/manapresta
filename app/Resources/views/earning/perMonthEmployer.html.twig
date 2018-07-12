@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="row mb-4 d-flex justify-content-around">
+            <div class="text-center col-md-4"><a href="{{ path('earning_per_month') }}" class="btn {{ app.request.pathInfo matches '{^/earning/month$}' ? 'btn-info' : 'btn-outline-info' }}">Par mois</a></div>
+            <div class="text-center col-md-4"><a href="{{ path('earning_per_employer') }}" class="btn {{ app.request.pathInfo matches '{^/earning/employer$}' ? 'btn-info' : 'btn-outline-info' }}">Par employeur</a></div>
+            <div class="text-center col-md-4"><a href="{{ path('earning_per_month_employer') }}" class="btn {{ app.request.pathInfo matches '{^/earning/month_employer$}' ? 'btn-info' : 'btn-outline-info' }}">Par mois + employeur</a></div>
+        </div>
+
+        <div class="col-md-12 card">
+            Par mois ET employeur
+        </div>
+
+    </div>
+{% endblock %}

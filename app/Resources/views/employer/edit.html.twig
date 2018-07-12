@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="col-md-6 offset-md-3 card pb-3">
+
+            <h2 class="text-center mb-4">Modifier un employeur</h2>
+
+            {{ form_start(edit_form) }}
+
+                <p>{{ form_widget(edit_form.name, {'attr': {'placeholder': 'Nom de l\'employeur'}}) }}</p>
+                <p>{{ form_widget(edit_form.address, {'attr': {'placeholder': 'Adresse de l\'employeur'}}) }}</p>
+
+                <div class="text-center"><button class="btn btn-outline-dark darkRedColor" type="submit">Enregistrer</button></div>
+
+            {{ form_end(edit_form) }}
+
+            <div class="d-flex justify-content-around mt-3">
+                <a href="{{ path('employer_index') }}" class="btn btn-outline-dark darkRedColor">&nbsp&nbsp&nbspRetour&nbsp&nbsp&nbsp</a>
+
+                {{ form_start(delete_form) }}
+                    <div class="text-right"><button class="btn btn-outline-danger" type="submit">Supprimer</button></div>
+                {{ form_end(delete_form) }}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

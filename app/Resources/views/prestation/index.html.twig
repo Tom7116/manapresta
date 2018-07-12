@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-md-12 card py-3">
+
+            <div class="text-center"><a href="{{ path('prestation_new') }}" class="btn btn-outline-dark darkRedColor mb-3"><i class="fas fa-plus"></i> Ajouter une prestation</a></div>
+
+            {% if prestations == false %}
+                <div class="text-center text-secondary"><i>Vous n'avez pas encore enregistré de prestations.</i></div>
+            {% else %}
+            <table class="table table-striped bg-white border border-dark text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Employeur</th>
+                        <th>Lieu</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Heures travaillées</th>
+                        <th>Honoraire BRUT</th>
+                        <th>Honoraire NET</th>
+                        <th>Gains NET (environ)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for prestation in prestations %}
+                    <tr>
+                        <td><a href="{{ path('prestation_edit', { 'id': prestation.id }) }}"><i class="far fa-edit"></i></a></td>
+                        <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
+                        <td class="employerColor">{{ prestation.employer }}</td>
+                        <td>{{ prestation.place }}</td>
+                        <td>{% if prestation.startTime %}{{ prestation.startTime|date('H:i') }}{% endif %}</td>
+                        <td>{% if prestation.endTime %}{{ prestation.endTime|date('H:i') }}{% endif %}</td>
+                        <td class="hoursColor">{% if prestation.hoursWorked %}{{ prestation.hoursWorked|date('H:i') }}{% endif %}</td>
+                        <td>{% if prestation.grossHonorary %}{{ prestation.grossHonorary }}€{% else %}/{% endif %}</td>
+                        <td>{% if prestation.netHonorary %}{{ prestation.netHonorary }}€{% else %}/{% endif %}</td>
+                        <td class="gainsColor">{{ prestation.totalNetGains }}€</td>
+                        <td><a href="{{ path('prestation_delete', { 'id': prestation.id } ) }}" class="text-danger"><i class="far fa-times-circle"></i></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

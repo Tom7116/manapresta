@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="col-md-6 offset-md-3 card pb-3">
+
+            <h1 class="text-center mb-4">Modifier une prestation</h1>
+
+            <div class="container">
+                {{ form_start(edit_form) }}
+
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            {{ form_row(edit_form.employer, {'label': 'Employeur'}) }}
+                        </div>
+                        <div class="col-md-8">
+                            {{ form_row(edit_form.place, {'label': 'Lieu'}) }}
+                        </div>
+                    </div>
+
+                    {{ form_row(edit_form.startTime, {'label': 'Début'}) }}
+
+                    {{ form_row(edit_form.endTime, {'label': 'Fin'}) }}
+
+                    <div class="row text-center">
+                        <div class="col-md-4 offset-md-1">
+                            {{ form_row(edit_form.grossHonorary, {'label': 'Honoraire BRUT', 'type': 'number', 'attr': {'step': 0.1}}) }}
+                        </div>
+
+                        <div class="col-md-4 offset-md-2">
+                            {{ form_row(edit_form.netHonorary, {'label': 'Honoraire NET', 'type': 'number', 'attr': {'step': 0.1}}) }}
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around mt-3">
+                        <a href="{{ path('prestation_index') }}" class="btn btn-outline-dark darkRedColor">Retour</a>
+                        <div class="text-right"><button class="btn btn-outline-dark darkRedColor" type="submit">Enregistrer</button></div>
+                    </div>
+
+                {{ form_end(edit_form) }}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        $(document).ready(function() {
+            $('input[id="prestation_grossHonorary"]').keyup(function() {
+                let $f = $('input[id="prestation_netHonorary"]');
+                ($(this).val() != '') ? $f.attr('disabled', true) : $f.attr('disabled', false);
+            });
+        });
+
+        $(document).ready(function() {
+            $('input[id="prestation_netHonorary"]').keyup(function() {
+                let $f = $('input[id="prestation_grossHonorary"]');
+                ($(this).val() != '') ? $f.attr('disabled', true) : $f.attr('disabled', false);
+            });
+        });
+
+        if (!$('input[id="prestation_grossHonorary"]').val()) {
+            $('input[id="prestation_grossHonorary"]').attr('disabled', true);
+        } else {
+            $('input[id="prestation_netHonorary"]').attr('disabled', true);
+        }
+    </script>
+
+{% endblock %}

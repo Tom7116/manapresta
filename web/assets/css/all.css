@@ -1,0 +1,55 @@
+body {
+    background: url("/assets/img/wallpaper.jpg") fixed;
+    background-size: 100% 100%;
+    font-family: 'Muli', sans-serif;
+}
+
+header {
+    box-shadow: black 6px 6px 6px;
+    background-color: #e1e1e1;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+    text-shadow: darkred 1px 1px 1px;
+}
+
+.card {
+    box-shadow: black 6px 6px 6px;
+    background-color: #e1e1e1;
+}
+
+h1:hover {
+    text-shadow: darkred;
+}
+
+.darkRedColor {
+    color: darkred;
+}
+
+.dateColor {
+    color: red;
+}
+
+.employerColor {
+    color: darkorange;
+}
+
+.hoursColor {
+    color: dodgerblue;
+}
+
+.gainsColor {
+    color: rgb(0,175,33);
+}
+
+.active {
+    color: black;
+    text-shadow: darkred 1px 1px 1px;
+}
+
+.monthButtons {
+    width: 500px;
+    height: 50px;
+}

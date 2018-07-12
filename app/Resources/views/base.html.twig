@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}ManaPresta{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/assets/css/all.css">
+        <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container mb-4 mt-2">
+            <header class="rounded">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="{{ path('homepage') }}"><h1>ManaPresta</h1>{% if app.user %}<span class="darkRedColor">Bienvenue {{ app.user.pseudo }} !</span>{% endif %}</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav m-auto">
+                            {% if app.user %}
+                                <li class="nav-item">
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/employer}' ? 'active' }}" href="{{ path('employer_index') }}">Mes Employeurs</a></h5>
+                                </li>
+                                <li class="nav-item">
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/prestation}' ? 'active' }}" href="{{ path('prestation_index') }}">Mes Prestations</a></h5>
+                                </li>
+                                <li class="nav-item">
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/earning}' ? 'active' }}" href="{{ path('earning_per_month') }}">Mes Revenus</a></h5>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="text-dark mr-5" href="{{ path('homepage') }}">Se connecter</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="text-dark ml-5" href="{{ path('register') }}">S'inscrire</a>
+                                </li>
+                            {% endif %}
+
+
+                        </ul>
+                        {% if app.user %}
+                            <a href="{{ path('logout') }}" class="btn btn-outline-dark darkRedColor"><i><i class="fas fa-sign-out-alt fa-lg"></i> Se déconnecter</i></a>
+                        {% endif %}
+                    </div>
+                </nav>
+            </header>
+        </div>
+
+        <div class="container">
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="mb-5">
+        {% block body %}{% endblock %}
+        </div>
+
+        {% block js %}{% endblock %}
+
+    </body>
+
+</html>

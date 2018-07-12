@@ -1,0 +1,6 @@
+{% block content %}
+    <strong>Bienvenue sur ManaPresta !</strong><br>
+    <p>Pour valider votre inscription vous devez confirmer votre adresse mail en <a href="{{ url('registrationConfirmation', { 'slug': user.token }) }}">cliquant ici</a>.</p>
+    <p>Merci de votre compréhension,<br>A très bientôt sur ManaPresta !</p>
+    <p><i>(Ceci est un mail automatique, merci de ne pas répondre.)</i></p>
+{% endblock %}

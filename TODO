@@ -1,0 +1,42 @@
+CONNEXION  INSCRIPTION :
+1) Inscription avec activation de compte par confirmation d'adresse mail (envoi de mail);
+2) Connection avec 'Security';
+3) Logout;
+4) Validation coter serveur sur les 2 form (login et register);
+5) Impossible de se connecter tant qu'on a pas valider son compte par mail;
+6) Impossible d'aller sur la page login si on est déjà connecté;
+7) Impossible d'aller sur la page register si on est déjà connecté;
+8) Front;
+9) Mot de passe oublié;
+10) TODO : Captcha pour inscription;
+
+EMPLOYEUR :
+1) Créer le CRUD en SLI pour Employeur;
+2) Fonctionnelle pour chaque User;
+3) Front, affichage des employeurs : tous les employeurs (tableau), chaque employeur;
+4) Validation coter serveur dans le buildform;
+5) Action "voir les presta" pour visualiser toutes les presta de l'employeur en question;
+
+PRESTATION :
+1) Créer le CRUD en SLI pour Prestations;
+2) Faire tous les calculs dans le controller pour les Gains net etc;
+3) Fonctionnelle pour chaque User;
+4) Fonctionne avec les Employeurs (verifier que se soit bien par rapport au user);
+5) Front, affichage des prestations : form New a travailler (input datetime à mettre en français);
+5) TODO : Form New (input datetime, mois à mettre en français);
+6) TODO : Form New (champs years, $years = [] + 'data' => new DateTime('Y-m-d'));
+7) Validation coter serveur dans le buildform;
+8) TODO : Classer les prestas par date;
+
+REVENUS :
+-> 1) TODO : Par mois, tous les mois, accordéon (impossible de dérouler 2 mois en même temps)(cb d'heures travaillées, cb en revnues);
+2) TODO : Par employeur, tous les employeurs, accordéon (impossible de dérouler 2 employeurs en même temps)(cb d'heures travaillées, cb en revnues);
+3) TODO : Par mois + employeur, ALL;
+4) TODO : Classer les prestas par date;
+
+OPTIMISATION :
+1) ~TODO : Flash Message pour : ajout, suppression, modification de employeurs ET prestations;
+2) ~TODO : Flash Message : MEP de Toaster;
+3) TODO : Pas de camelCase dans les noms des champs en BDD;
+4) TODO : __toString a éviter, choiceTypeField dans les form;
+5) TODO : Have a look to {% include my_twig_file %};
