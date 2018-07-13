@@ -6,7 +6,79 @@
         {% include 'earning/nav.html.twig' %}
 
         <div class="col-md-12 card">
-            Par mois ET employeur
+
+            <div id="accordion">
+                {% for key, employers in monthlyPrestasPerEmployer %}
+                    <div class="text-center">
+                        <div class="card-header" id="heading{{ key }}">
+                            <p class="mb-0">
+                                <button class="btn btn-secondary monthButtons" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="true" aria-controls="collapseOne">
+                                    <h3>{{ months[key] }}</h3>
+                                </button>
+                            </p>
+                        </div>
+
+                        <div id="collapse{{ key }}" class="collapse" aria-labelledby="heading{{ key }}" data-parent="#accordion">
+                            <div class="card-body">
+                                {% for x, prestas in employers %}
+                                    {% if prestas == true %}
+                                        <h2 class="text-center mb-3 employerColor">{{ prestas[0].employer }}</h2>
+                                        <table class="table table-responsive table-striped bg-white border border-dark text-center">
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th></th>
+                                                <th>Date</th>
+                                                <th>Employeur</th>
+                                                <th>Lieu</th>
+                                                <th>Début</th>
+                                                <th>Fin</th>
+                                                <th>Heures travaillées</th>
+                                                <th>Honoraire BRUT</th>
+                                                <th>Honoraire NET</th>
+                                                <th>Gains NET (environ)</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            {% for prestation in prestas %}
+                                                <tr>
+                                                    <td><a href="{{ path('prestation_edit', { 'id': prestation.id }) }}"><i class="far fa-edit"></i></a></td>
+                                                    <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
+                                                    <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer }}</a></td>
+                                                    <td>{{ prestation.place }}</td>
+                                                    <td>{% if prestation.startTime %}{{ prestation.startTime|date('H:i') }}{% endif %}</td>
+                                                    <td>{% if prestation.endTime %}{{ prestation.endTime|date('H:i') }}{% endif %}</td>
+                                                    <td class="hoursColor">{% if prestation.hoursWorked %}{{ prestation.hoursWorked|date('H:i') }}{% endif %}</td>
+                                                    <td>{% if prestation.grossHonorary %}{{ prestation.grossHonorary }}€{% else %}/{% endif %}</td>
+                                                    <td>{% if prestation.netHonorary %}{{ prestation.netHonorary }}€{% else %}/{% endif %}</td>
+                                                    <td class="gainsColor">{{ prestation.totalNetGains }}€</td>
+                                                    <td><a href="{{ path('prestation_delete', { 'id': prestation.id } ) }}" class="text-danger"><i class="far fa-times-circle"></i></a></td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr class="bgTr">
+                                                <td></td>
+                                                <th>Totaux</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <th class="hoursColor">{{ monthsHours[key][x] }}</th>
+                                                <td></td>
+                                                <td></td>
+                                                <th class="gainsColor">{{ monthsGains[key][x] }}€</th>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
         </div>
 
     </div>
