@@ -31,7 +31,7 @@
                     <tr>
                         <td><a href="{{ path('prestation_edit', { 'id': prestation.id }) }}"><i class="far fa-edit"></i></a></td>
                         <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
-                        <td class="employerColor">{{ prestation.employer }}</td>
+                        <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer.name }}</a></td>
                         <td>{{ prestation.place }}</td>
                         <td>{% if prestation.startTime %}{{ prestation.startTime|date('H:i') }}{% endif %}</td>
                         <td>{% if prestation.endTime %}{{ prestation.endTime|date('H:i') }}{% endif %}</td>

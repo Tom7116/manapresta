@@ -22,7 +22,7 @@
                             <div class="card-body">
                                 {% for x, prestas in employers %}
                                     {% if prestas == true %}
-                                        <h2 class="text-center mb-3 employerColor">{{ prestas[0].employer }}</h2>
+                                        <h2 class="text-center mb-3 employerColor">{{ prestas[0].employer.name }}</h2>
                                         <table class="table table-responsive table-striped bg-white border border-dark text-center">
                                             <thead class="thead-dark">
                                             <tr>
@@ -45,7 +45,7 @@
                                                 <tr>
                                                     <td><a href="{{ path('prestation_edit', { 'id': prestation.id }) }}"><i class="far fa-edit"></i></a></td>
                                                     <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
-                                                    <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer }}</a></td>
+                                                    <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer.name }}</a></td>
                                                     <td>{{ prestation.place }}</td>
                                                     <td>{% if prestation.startTime %}{{ prestation.startTime|date('H:i') }}{% endif %}</td>
                                                     <td>{% if prestation.endTime %}{{ prestation.endTime|date('H:i') }}{% endif %}</td>

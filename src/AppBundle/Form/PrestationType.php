@@ -26,6 +26,9 @@ class PrestationType extends AbstractType
         $builder
             ->add('employer', EntityType::class, [
                 'class' => Employer::class,
+                'choice_label' => function ($employer) {
+                    return $employer->getName();
+                },
                 'constraints' => new NotBlank(['message' => 'Champ obligatoire.']),
                 'query_builder' => function (EntityRepository $er) use ($user) {
                     return $er->createQueryBuilder('u')
