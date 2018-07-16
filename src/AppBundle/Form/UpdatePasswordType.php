@@ -23,7 +23,7 @@ class UpdatePasswordType extends AbstractType
                 'invalid_message' => 'Mots de passe non identique.',
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Confirmation mot de passe'],
-                'constraints' => [ new NotBlank()],
+                'constraints' => [ new NotBlank(['message' => 'Champ obligatoire.'])],
             ]);
     }
     /**

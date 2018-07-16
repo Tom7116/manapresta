@@ -64,7 +64,7 @@ class DefaultController extends Controller
 
                 $this->addFlash('success', 'Un email de réinitialisation de mot de passe vous a été transmis à l\'adresse suivante : ' . $emailForm);
             } else {
-                $this->addFlash('danger', 'Cet email ne correspond à aucun utilisateur !');
+                $this->addFlash('danger', 'Email invalide !');
             }
 
             return ($this->redirectToRoute('forgotPassword'));

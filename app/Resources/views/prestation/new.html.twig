@@ -5,14 +5,14 @@
     <div class="container">
         <div class="col-md-6 offset-md-3 card pb-3">
 
-            <h2 class="text-center mb-4">Ajout d'une prestation</h2>
+            <h2 class="text-center mb-4">Ajouter une prestation</h2>
 
             <div class="container text-center">
                 {{ form_start(form) }}
 
                     <div class="row">
                         <div class="col-md-4">
-                            {{ form_row(form.employer, {'label': 'Employeur'}) }}
+                            {{ form_row(form.employer, {'label': 'Employeur', 'attr': {'required': true}}) }}
                         </div>
                         <div class="col-md-8">
                             {{ form_row(form.place, {'label': 'Lieu'}) }}

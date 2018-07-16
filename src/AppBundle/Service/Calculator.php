@@ -4,6 +4,12 @@ namespace AppBundle\Service;
 
 class Calculator
 {
+    /**
+     * Return hour minute in string from a decimal.
+     *
+     * @param $dec
+     * @return string
+     */
     public function convertTime($dec)
     {
         // start by converting to seconds

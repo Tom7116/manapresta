@@ -11,7 +11,7 @@
                 <div class="alert alert-danger">Email et/ou mot de passe incorrect.</div>
             {% endif %}
 
-            <form action="{{ path('homepage') }}" method="post" class="form-group">
+            <form action="{{ path('homepage') }}" method="post" class="pb-3">
                 <p><input type="email" name="_username" value="{{ last_username }}" class="form-control" placeholder="Email" required></p>
 
                 <p><input type="password" name="_password" class="form-control" placeholder="Mot de passe" required></p>
@@ -22,6 +22,9 @@
             </form>
 
         </div>
+
+        {% include 'security/description.html.twig' %}
+
     </div>
 
 {% endblock %}

@@ -5,9 +5,9 @@
     <div class="container">
         <div class="col-md-6 offset-md-3 card pb-3">
 
-            <h1 class="text-center mb-4">Modifier une prestation</h1>
+            <h2 class="text-center mb-4">Modifier une prestation</h2>
 
-            <div class="container">
+            <div class="container text-center">
                 {{ form_start(edit_form) }}
 
                     <div class="row text-center">
@@ -19,17 +19,21 @@
                         </div>
                     </div>
 
-                    {{ form_row(edit_form.startTime, {'label': 'Début'}) }}
+                    <div class="d-flex justify-content-around">
+                        {{ form_row(edit_form.startTime, {'label': 'Début'}) }}
+                    </div>
 
-                    {{ form_row(edit_form.endTime, {'label': 'Fin'}) }}
+                    <div class="d-flex justify-content-around">
+                        {{ form_row(edit_form.endTime, {'label': 'Fin'}) }}
+                    </div>
 
                     <div class="row text-center">
                         <div class="col-md-4 offset-md-1">
-                            {{ form_row(edit_form.grossHonorary, {'label': 'Honoraire BRUT', 'type': 'number', 'attr': {'step': 0.1}}) }}
+                            {{ form_row(edit_form.grossHonorary, {'label': 'Honoraire BRUT', 'type': 'number', 'attr': {'step': 0.25, 'min': 0}}) }}
                         </div>
-
-                        <div class="col-md-4 offset-md-2">
-                            {{ form_row(edit_form.netHonorary, {'label': 'Honoraire NET', 'type': 'number', 'attr': {'step': 0.1}}) }}
+                        <div class="col-md-2 mt-4">OU</div>
+                        <div class="col-md-4">
+                            {{ form_row(edit_form.netHonorary, {'label': 'Honoraire NET', 'type': 'number', 'attr': {'step': 0.25, 'min': 0}}) }}
                         </div>
                     </div>
 

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="col-md-6 offset-md-3 card">
+
+            <h2 class="text-center mb-4">Inscription</h2>
+
+            {{ form_start(form) }}
+
+                <p>{{ form_widget(form.pseudo, {'attr': {'placeholder': 'Pseudo'}}) }}</p>
+                <p>{{ form_errors(form.pseudo) }}</p>
+
+                <p>{{ form_widget(form.email, {'attr': {'placeholder': 'Email'}}) }}</p>
+                <p>{{ form_errors(form.email) }}</p>
+
+                <p>{{ form_widget(form.password.first, {'attr': {'placeholder': 'Mot de passe'}}) }}</p>
+                <p>{{ form_errors(form.password.first) }}</p>
+
+                <p>{{ form_widget(form.password.second, {'attr': {'placeholder': 'Confirmer mot de passe'}}) }}</p>
+                <p>{{ form_errors(form.password.second) }}</p>
+
+                <div class="text-right"><button class="btn btn-outline-dark darkRedColor" type="submit">S'incrire</button></div>
+
+            {{ form_end(form) }}
+
+        </div>
+
+        {% include 'security/description.html.twig' %}
+
+    </div>
+{% endblock %}
