@@ -73,6 +73,8 @@ class EmployerController extends Controller
         $editForm = $this->createForm('AppBundle\Form\EmployerType', $employer);
         $editForm->handleRequest($request);
 
+        $previousPath = $request->server->get('HTTP_REFERER');
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
@@ -83,6 +85,7 @@ class EmployerController extends Controller
             'employer' => $employer,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'previousPath' => $previousPath,
         ));
     }
 
@@ -94,6 +97,17 @@ class EmployerController extends Controller
      */
     public function delete(Request $request, Employer $employer)
     {
+        $em = $this->getDoctrine()->getManager();
+        $prestaOfEmployer = $em->getRepository(Prestation::class)->findBy([
+            'user' => $this->getUser(),
+            'employer' => $employer,
+        ]);
+
+        if ($prestaOfEmployer) {
+            $this->addFlash('danger', 'Des prestations pour cet employeur sont enregistrées.');
+            return $this->redirect($request->server->get('HTTP_REFERER'));
+        }
+
         $form = $this->createDeleteForm($employer);
         $form->handleRequest($request);
 
@@ -119,27 +133,5 @@ class EmployerController extends Controller
             ->setAction($this->generateUrl('employer_delete', array('id' => $employer->getId())))
             ->setMethod('DELETE')
             ->getForm();
-    }
-
-    /**
-     * Show all prestations from the employer.
-     *
-     * @param Employer $employer The employer entity
-     *
-     * @Route("/{id}", name="employer_prestations")
-     * @Method({"GET", "POST"})
-     */
-    public function showPrestations(Employer $employer)
-    {
-        $prestations = $this->getDoctrine()->getManager()->getRepository(Prestation::class)->findAllByEmployer($employer, $this->getUser());
-
-        if (!$prestations) {
-            $this->addFlash('info', 'Vous n\'avez pas encore enregistré de prestations pour cet employeur.');
-            return $this->redirectToRoute('employer_index');
-        }
-
-        return $this->render('prestation/employerPrestations.html.twig', [
-           'prestations' => $prestations,
-        ]);
     }
 }

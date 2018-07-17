@@ -103,6 +103,8 @@ class PrestationController extends Controller
         $editForm = $this->createForm('AppBundle\Form\PrestationType', $prestation, ['user' => $this->getUser()]);
         $editForm->handleRequest($request);
 
+        $previousPath = $request->server->get('HTTP_REFERER');
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
             $endTime = $editForm->getData()->getEndTime();
@@ -141,6 +143,7 @@ class PrestationController extends Controller
             'prestation' => $prestation,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'previousPath' => $previousPath,
         ));
     }
 
@@ -150,13 +153,13 @@ class PrestationController extends Controller
      * @Route("/{id}", name="prestation_delete")
      * @Method({"GET", "POST"})
      */
-    public function delete(Prestation $prestation)
+    public function delete(Request $request, Prestation $prestation)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($prestation);
         $em->flush();
 
-        return $this->redirectToRoute('prestation_index');
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 
     /**
@@ -173,5 +176,24 @@ class PrestationController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Change isPaid attribut.
+     *
+     * @Route("/{id}/is_paid", name="is_paid")
+     * @Method("GET")
+     */
+    public function isPaid(Request $request, Prestation $prestation)
+    {
+        if ($prestation->isPaid()) {
+            $prestation->setIsPaid(false);
+        } else {
+            $prestation->setIsPaid(true);
+        }
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 }

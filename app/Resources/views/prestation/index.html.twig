@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="col-md-12 card py-3">
+    <div class="container-fluid">
+        <div class="col-xs-12 card py-3">
 
             <div class="text-center"><a href="{{ path('prestation_new') }}" class="btn btn-outline-dark darkRedColor mb-3"><i class="fas fa-plus"></i> Ajouter une prestation</a></div>
 
             {% if prestations == false %}
                 <div class="text-center text-secondary"><i>Vous n'avez pas encore enregistré de prestations.</i></div>
             {% else %}
-            <table class="table table-striped bg-white border border-dark text-center">
+            <table class="table table-sm table-hover table-responsive-xl bg-white border border-dark text-center">
                 <thead class="thead-dark">
                     <tr>
-                        <th></th>
+                        <th>Payée</th>
                         <th>Date</th>
                         <th>Employeur</th>
                         <th>Lieu</th>
@@ -28,8 +28,8 @@
 
                 <tbody>
                 {% for prestation in prestations %}
-                    <tr>
-                        <td><a href="{{ path('prestation_edit', { 'id': prestation.id }) }}"><i class="far fa-edit"></i></a></td>
+                    <tr onclick="location.href='{{ path('prestation_edit', { 'id': prestation.id }) }}';">
+                        <td><a href="{{ path('is_paid', { 'id': prestation.id }) }}"><button class="btn {{ prestation.isPaid ? "btn-success" : "btn-danger" }}">{{ prestation.isPaid ? "Oui" : "Non" }}</button></a></td>
                         <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
                         <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer.name }}</a></td>
                         <td>{{ prestation.place }}</td>

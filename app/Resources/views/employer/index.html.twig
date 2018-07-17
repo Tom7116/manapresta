@@ -1,21 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="col-md-12 card py-3">
+    <div class="container-fluid">
+        <div class="col-xs-12 card py-3">
 
             <div class="text-center"><a href="{{ path('employer_new') }}" class="btn btn-outline-dark darkRedColor mb-3"><i class="fas fa-plus"></i> Ajouter un employeur</a></div>
 
             {% if employers == false %}
                 <div class="text-center text-secondary"><i>Vous n'avez pas encore enregistré d'employeurs.</i></div>
             {% else %}
-            <table class="table table-striped bg-white border border-dark text-center">
+            <table class="table table-sm table-striped table-responsive-md bg-white border border-dark text-center">
                 <thead class="thead-dark">
                     <tr>
                         <th>Nom</th>
                         <th>Adresse</th>
                         <th>Date d'ajout</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
 
@@ -25,7 +24,6 @@
                             <td><a href="{{ path('employer_edit', { 'id': employer.id }) }}" class="employerColor">{{ employer.name }}</a></td>
                             <td>{{ employer.address }}</td>
                             <td>{% if employer.createdAt %}{{ employer.createdAt|date('d/m/Y') }}{% endif %}</td>
-                            <td><a href="{{ path('employer_prestations', { 'id': employer.id }) }}" class="badge badge-info">Voir les presta</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

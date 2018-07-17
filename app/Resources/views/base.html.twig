@@ -12,39 +12,65 @@
         <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     </head>
 
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
     <body>
         <div class="container mb-4 mt-2">
             <header class="rounded">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="navbar-brand" href="{{ path('homepage') }}"><h1>ManaPresta</h1>{% if app.user %}<span class="darkRedColor">Bienvenue {{ app.user.pseudo }} !</span>{% endif %}</a>
+                    <div>
+                    {% if app.request.pathInfo matches '{^/employer}' %}
+                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <p class="activeLink">Mes Employeurs</p>
+                        </button>
+                    {% elseif app.request.pathInfo matches '{^/prestation}' %}
+                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <p class="activeLink">Mes Prestations</p>
+                        </button>
+                    {% elseif app.request.pathInfo matches '{^/earning}' %}
+                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <p class="activeLink">Mes Revenus</p>
+                        </button>
+                    {% elseif app.request.pathInfo matches '{^/register$}' %}
+                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <p class="activeLink">S'incrire</p>
+                        </button>
+                    {% elseif app.request.pathInfo matches '{^/$}' %}
+                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <p class="activeLink">Se connecter</p>
+                        </button>
+
+                    {% endif %}
+                    </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav m-auto">
                             {% if app.user %}
-                                <li class="nav-item">
+                                <li class="nav-item text-center">
                                     <h5><a class="nav-link {{ app.request.pathInfo matches '{^/employer}' ? 'activeLink' }}" href="{{ path('employer_index') }}">Mes Employeurs</a></h5>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item text-center">
                                     <h5><a class="nav-link {{ app.request.pathInfo matches '{^/prestation}' ? 'activeLink' }}" href="{{ path('prestation_index') }}">Mes Prestations</a></h5>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item text-center">
                                     <h5><a class="nav-link {{ app.request.pathInfo matches '{^/earning}' ? 'activeLink' }}" href="{{ path('earning_per_month') }}">Mes Revenus</a></h5>
                                 </li>
                             {% else %}
-                                <li class="nav-item">
-                                    <a class="text-dark mr-5" href="{{ path('homepage') }}">Se connecter</a>
+                                <li class="nav-item text-center">
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/$}' ? 'activeLink' }}" href="{{ path('homepage') }}">Se connecter</a></h5>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="text-dark ml-5" href="{{ path('register') }}">S'inscrire</a>
+                                <li class="nav-item text-center">
+                                    <h5><a class="nav-link {{ app.request.pathInfo matches '{^/register$}' ? 'activeLink' }}" href="{{ path('register') }}">S'inscrire</a></h5>
                                 </li>
                             {% endif %}
 
 
                         </ul>
                         {% if app.user %}
-                            <a href="{{ path('logout') }}" class="btn btn-outline-dark darkRedColor"><i><i class="fas fa-sign-out-alt fa-lg"></i> Se déconnecter</i></a>
+                            <div class="text-right"><a href="{{ path('logout') }}" class="btn btn-outline-dark darkRedColor"><i><i class="fas fa-sign-out-alt fa-lg"></i> Se déconnecter</i></a></div>
                         {% endif %}
                     </div>
                 </nav>

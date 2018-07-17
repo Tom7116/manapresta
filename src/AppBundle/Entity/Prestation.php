@@ -122,6 +122,12 @@ class Prestation
      */
     private $totalNetGains;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_paid", type="boolean")
+     */
+    private $isPaid = false;
 
     /**
      * Get id
@@ -459,6 +465,24 @@ class Prestation
     public function getTotalNetGains()
     {
         return $this->totalNetGains;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPaid()
+    {
+        return $this->isPaid;
+    }
+
+    /**
+     * @param bool $isPaid
+     * @return Prestation
+     */
+    public function setIsPaid($isPaid)
+    {
+        $this->isPaid = $isPaid;
+        return $this;
     }
 }
 

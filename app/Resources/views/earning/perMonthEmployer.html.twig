@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid">
 
         {% include 'earning/nav.html.twig' %}
 
-        <div class="col-md-12 card">
+        <div class="col-xs-12 card">
 
             <div id="accordion">
                 {% if monthlyPrestasPerEmployer == false %}
@@ -26,10 +26,10 @@
                                     {% for x, prestas in employers %}
                                         {% if prestas == true %}
                                             <h2 class="text-center mb-3 employerColor">{{ prestas[0].employer.name }}</h2>
-                                            <table class="table table-responsive table-striped bg-white border border-dark text-center">
+                                            <table class="table table-sm table-hover table-responsive-xl bg-white border border-dark text-center">
                                                 <thead class="thead-dark">
                                                 <tr>
-                                                    <th></th>
+                                                    <th>Payée</th>
                                                     <th>Date</th>
                                                     <th>Employeur</th>
                                                     <th>Lieu</th>
@@ -45,8 +45,8 @@
 
                                                 <tbody>
                                                 {% for prestation in prestas %}
-                                                    <tr>
-                                                        <td><a href="{{ path('prestation_edit', { 'id': prestation.id }) }}"><i class="far fa-edit"></i></a></td>
+                                                    <tr onclick="location.href='{{ path('prestation_edit', { 'id': prestation.id }) }}';">
+                                                        <td><a href="{{ path('is_paid', { 'id': prestation.id }) }}"><button class="btn {{ prestation.isPaid ? "btn-success" : "btn-danger" }}">{{ prestation.isPaid ? "Oui" : "Non" }}</button></a></td>
                                                         <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
                                                         <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer.name }}</a></td>
                                                         <td>{{ prestation.place }}</td>

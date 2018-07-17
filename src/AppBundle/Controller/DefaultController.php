@@ -67,7 +67,7 @@ class DefaultController extends Controller
                 $this->addFlash('danger', 'Email invalide !');
             }
 
-            return ($this->redirectToRoute('forgotPassword'));
+            return ($this->redirectToRoute('homepage'));
         }
 
         return $this->render('security/forgotPassword.html.twig', [

@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="col-md-6 offset-md-3 card pb-3">
 
             <h2 class="text-center mb-4">Modifier un employeur</h2>
@@ -19,7 +19,7 @@
             {{ form_end(edit_form) }}
 
             <div class="d-flex justify-content-around mt-3">
-                <a href="{{ path('employer_index') }}" class="btn btn-outline-dark darkRedColor">Retour</a>
+                <a href="{{ previousPath }}" class="btn btn-outline-dark darkRedColor"><i class="fas fa-arrow-left"></i> Retour</a>
 
                 {{ form_start(delete_form) }}
                     <div class="text-right"><button class="btn btn-outline-danger" type="submit">Supprimer</button></div>
