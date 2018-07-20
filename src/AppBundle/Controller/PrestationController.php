@@ -6,7 +6,9 @@ use AppBundle\Entity\Prestation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Prestation controller.
@@ -194,6 +196,12 @@ class PrestationController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirect($request->server->get('HTTP_REFERER'));
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'is_paid' => $prestation->isPaid(),
+            ]);
+        } else {
+            return $this->redirect($request->server->get('HTTP_REFERER'));
+        }
     }
 }

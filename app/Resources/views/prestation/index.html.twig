@@ -29,7 +29,7 @@
                 <tbody>
                 {% for prestation in prestations %}
                     <tr onclick="location.href='{{ path('prestation_edit', { 'id': prestation.id }) }}';">
-                        <td><a href="{{ path('is_paid', { 'id': prestation.id }) }}"><button class="btn {{ prestation.isPaid ? "btn-success" : "btn-danger" }}">{{ prestation.isPaid ? "Oui" : "Non" }}</button></a></td>
+                        <td><a data-btn="paid" href="{{ path('is_paid', { 'id': prestation.id }) }}"><button class="btn {{ prestation.isPaid ? "btn-success" : "btn-danger" }}">{{ prestation.isPaid ? "Oui" : "Non" }}</button></a></td>
                         <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
                         <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer.name }}</a></td>
                         <td>{{ prestation.place }}</td>
@@ -48,4 +48,24 @@
 
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $('[data-btn="paid"]').on('click', function(e) {
+                e.preventDefault();
+
+                let $link = $(this);
+
+                $.get($link.attr('href'), function (datas) {
+                    let text = datas.is_paid ? 'Oui' : 'Non';
+
+                    $link.find('button').toggleClass('btn-success btn-danger').text(text);
+                });
+
+                return false;
+            });
+        });
+    </script>
 {% endblock %}
