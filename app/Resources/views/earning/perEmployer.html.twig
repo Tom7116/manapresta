@@ -63,8 +63,8 @@
                                             {% endfor %}
                                             <tr class="bgTr">
                                                 <td></td>
-                                                <td></td>
                                                 <th>Totaux</th>
+                                                <th class="dateColor">{{ prestas|length }}</th>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -88,4 +88,8 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('assets/js/ajaxFunctionIsPaid.js') }}"></script>
 {% endblock %}
