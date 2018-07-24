@@ -52,6 +52,8 @@ class EmployerController extends Controller
             $em->persist($employer);
             $em->flush();
 
+            $this->addFlash('success', 'Employeur ajouté !');
+
             return $this->redirectToRoute('employer_index');
         }
 
@@ -77,6 +79,8 @@ class EmployerController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Employeur modifié !');
 
             return $this->redirectToRoute('employer_index');
         }
@@ -116,6 +120,8 @@ class EmployerController extends Controller
             $em->remove($employer);
             $em->flush();
         }
+
+        $this->addFlash('success', 'Employeur supprimé !');
 
         return $this->redirectToRoute('employer_index');
     }

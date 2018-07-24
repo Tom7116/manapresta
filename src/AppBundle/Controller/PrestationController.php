@@ -84,6 +84,8 @@ class PrestationController extends Controller
             $em->persist($prestation);
             $em->flush();
 
+            $this->addFlash('success', 'Prestation ajoutée !');
+
             return $this->redirectToRoute('prestation_index');
         }
 
@@ -138,6 +140,8 @@ class PrestationController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Prestation modifiée !');
+
             return $this->redirectToRoute('prestation_index');
         }
 
@@ -160,6 +164,8 @@ class PrestationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($prestation);
         $em->flush();
+
+        $this->addFlash('success', 'Prestation supprimée !');
 
         return $this->redirect($request->server->get('HTTP_REFERER'));
     }
