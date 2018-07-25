@@ -1,7 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container text-white">
-        Bienvenue {{ app.user.pseudo }} !
+    <div class="container-fluid">
+        <h3 class="text-white text-center mb-3">Bienvenue {{ app.user.pseudo }} !<br>Vous trouverez ici la rubrique des infos utiles.</h3>
+
+        <div class="col-xs-12 card py-3">
+
+            {% if prestationsNotPaid == false %}
+                <h2 class="text-center text-success">Toutes vos prestations ont été payées ! :)</h2>
+            {% else %}
+                <h2 class="text-center mb-3 text-danger">Vous avez {{ prestationsNotPaid|length }} prestation(s) impayée(s) !</h2>
+                <table class="table table-sm table-hover table-responsive-xl bg-white border border-dark text-center">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Payée</th>
+                        <th>Date</th>
+                        <th>Employeur</th>
+                        <th>Lieu</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Heures travaillées</th>
+                        <th>Honoraire BRUT</th>
+                        <th>Honoraire NET</th>
+                        <th>Gains NET (environ)</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for prestation in prestationsNotPaid %}
+                        <tr>
+                            <td><a href="{{ path('prestation_edit', { 'id': prestation.id }) }}"><i class="far fa-edit"></i></a></td>
+                            <td><a data-btn="paid" href="{{ path('is_paid', { 'id': prestation.id }) }}" class="btn {{ prestation.isPaid ? "btn-success" : "btn-danger" }}">{{ prestation.isPaid ? "Oui" : "Non" }}</a></td>
+                            <td class="dateColor">{{ prestation.prestationDate|date('d/m/y') }}</td>
+                            <td><a href="{{ path('employer_edit', { 'id': prestation.employer.id }) }}" class="employerColor">{{ prestation.employer.name }}</a></td>
+                            <td>{{ prestation.place }}</td>
+                            <td>{% if prestation.startTime %}{{ prestation.startTime|date('H:i') }}{% endif %}</td>
+                            <td>{% if prestation.endTime %}{{ prestation.endTime|date('H:i') }}{% endif %}</td>
+                            <td class="hoursColor">{% if prestation.hoursWorked %}{{ prestation.hoursWorked|date('H:i') }}{% endif %}</td>
+                            <td>{% if prestation.grossHonorary %}{{ prestation.grossHonorary }}€{% else %}/{% endif %}</td>
+                            <td>{% if prestation.netHonorary %}{{ prestation.netHonorary }}€{% else %}/{% endif %}</td>
+                            <td class="gainsColor">{{ prestation.totalNetGains }}€</td>
+                            <td><a href="{{ path('prestation_delete', { 'id': prestation.id } ) }}" class="text-danger"><i class="far fa-times-circle"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+        </div>
     </div>
 {% endblock %}

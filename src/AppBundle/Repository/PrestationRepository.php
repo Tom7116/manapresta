@@ -14,6 +14,20 @@ use AppBundle\Entity\User;
 class PrestationRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
+     * Used in MemberSpaceController(memberSpace)
+     *
+     * @param User $user
+     * @return array
+     */
+    public function findNotPaidOrderByDate(User $user)
+    {
+        return $this->getEntityManager()
+            ->createQuery("SELECT p FROM AppBundle:Prestation p WHERE p.user = :user AND p.isPaid = false ORDER BY p.prestationDate")
+            ->setParameter(':user', $user)
+            ->getResult();
+    }
+
+    /**
      * Used in PrestationController(index)
      *
      * @param User $user
