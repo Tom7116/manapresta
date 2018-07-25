@@ -5,9 +5,11 @@
         <title>{% block title %}ManaPresta{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="/assets/css/all.css">
         <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     </head>
@@ -15,29 +17,32 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <body>
+
+        <button id="topBtn" title="Go to top" class="btn btn-warning darkRedColor"><i class="fas fa-arrow-up"></i></button>
+
         <div class="container mb-4 mt-2">
             <header class="rounded">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="navbar-brand" href="{{ path('homepage') }}"><h1>ManaPresta</h1>{% if app.user %}<span class="darkRedColor">Bienvenue {{ app.user.pseudo }} !</span>{% endif %}</a>
                     <div>
                     {% if app.request.pathInfo matches '{^/employer}' %}
-                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler noBorder" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <p class="activeLink">Mes Employeurs</p>
                         </button>
                     {% elseif app.request.pathInfo matches '{^/prestation}' %}
-                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler noBorder" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <p class="activeLink">Mes Prestations</p>
                         </button>
                     {% elseif app.request.pathInfo matches '{^/earning}' %}
-                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler noBorder" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <p class="activeLink">Mes Revenus</p>
                         </button>
                     {% elseif app.request.pathInfo matches '{^/register$}' %}
-                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler noBorder" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <p class="activeLink">S'incrire</p>
                         </button>
                     {% elseif app.request.pathInfo matches '{^/$}' %}
-                        <button class="navbar-toggler test" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler noBorder" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <p class="activeLink">Se connecter</p>
                         </button>
 
@@ -92,6 +97,24 @@
         </div>
 
         {% block js %}{% endblock %}
+
+        <script>
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    $("#topBtn").css('display', 'block');
+                } else {
+                    $("#topBtn").css('display', 'none');
+                }
+            }
+
+            $(function() {
+                $("#topBtn").click(function() {
+                    $("html, body").animate({scrollTop: 0}, 'slow');
+                });
+            });
+        </script>
 
     </body>
 
