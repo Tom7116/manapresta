@@ -24,15 +24,6 @@ class RegistrationController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
 
-                $isSameEmail = $entityManager->getRepository(User::class)->findBy([
-                    'email' => $form->getData()->getEmail(),
-                ]);
-
-                if ($isSameEmail) {
-                    $this->addFlash('danger', 'Email déjà enregistrée');
-                    return $this->redirectToRoute('register');
-                }
-
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
                 $user->setPassword($password);
 

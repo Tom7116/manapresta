@@ -35,7 +35,7 @@ class Mailer
 
     public function accountActivationEmail(User $user)
     {
-        $subject = "ManaPresta - Activation du compte";
+        $subject = "$this->name - Activation du compte";
         $to = $user->getEmail();
         $body = $this->templating->render('mail/accountActivation.html.twig', ['user' => $user]);
         $this->sendMail($to, $subject, $body);
@@ -43,9 +43,9 @@ class Mailer
 
     public function forgotPasswordEmail(User $user)
     {
-        $subject = "ManaPresta - Réinitialisation de votre mot de passe";
+        $subject = "$this->name - Réinitialisation de votre mot de passe";
         $to = $user->getEmail();
-        $body = $this->templating->render('mail/forgotPasswordEmail.html.twig', array('user' => $user));
+        $body = $this->templating->render('mail/forgotPasswordEmail.html.twig', ['user' => $user]);
         $this->sendMail($to, $subject, $body);
     }
 }

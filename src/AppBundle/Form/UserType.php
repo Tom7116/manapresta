@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 
 use AppBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,6 +34,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'constraints' => new UniqueEntity(['fields' => ['email'], 'message' => 'Cette email est déjà enregistrée.', 'entityClass' => User::class]),
             ]);
     }
 }
